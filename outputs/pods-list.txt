@@ -1,0 +1,4 @@
+NAME   READY   STATUS             RESTARTS        AGE
+zk-0   1/1     Running            0               5m48s
+zk-1   0/1     CrashLoopBackOff   5 (2m26s ago)   5m46s
+zk-2   0/1     CrashLoopBackOff   5 (2m18s ago)   5m44s
