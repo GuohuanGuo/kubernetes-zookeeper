@@ -46,7 +46,7 @@ metadata:
   namespace: u5243221
 spec:
   selector:
-  matchLabels:                # 添加 selector
+    matchLabels:                # 添加 selector
     app: zk                   # 确保与下面的 labels 完全一致
   serviceName: zk-hs
   replicas: 3
@@ -71,9 +71,9 @@ spec:
                     - zk
               topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: kubernetes-zookeeper
+      - name: zk
         imagePullPolicy: Always
-        image: kuberneteszookeeper/kubernetes-zookeeper:3.8.4
+        image: zookeeper:3.7
         resources:
           requests:
             memory: "1Gi"
