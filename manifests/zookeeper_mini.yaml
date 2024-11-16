@@ -32,7 +32,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: zk-pdb
-  namespace:u5243221
+  namespace: u5243221
 spec:
   selector:
     matchLabels:
