@@ -47,7 +47,7 @@ metadata:
 spec:
   selector:
     matchLabels:                # 添加 selector
-    app: zk                   # 确保与下面的 labels 完全一致
+      app: zk                   # 确保与下面的 labels 完全一致
   serviceName: zk-hs
   replicas: 3
   updateStrategy:
