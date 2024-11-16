@@ -46,15 +46,13 @@ metadata:
   namespace: u5243221
 spec:
   selector:
-    matchLabels:                # 添加 selector
-      app: zk                   # 确保与下面的 labels 完全一致
+    matchLabels:
+      app: zk
   serviceName: zk-hs
   replicas: 3
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: Parallel
-  updateStrategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -63,17 +61,17 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - zk
-              topologyKey: "kubernetes.io/hostname"
+          - labelSelector:
+              matchExpressions:
+              - key: "app"
+                operator: In
+                values:
+                - zk
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: zk
+        image: zookeeper:3.7
         imagePullPolicy: Always
-        image: zookeeper:3.7 
         resources:
           requests:
             memory: "1Gi"
@@ -88,30 +86,13 @@ spec:
         command:
         - sh
         - -c
-        - "start-zookeeper \
-          --servers=3 \
-          --data_dir=/var/lib/zookeeper/data \
-          --data_log_dir=/var/lib/zookeeper/data/log \
-          --conf_dir=/opt/zookeeper/conf \
-          --client_port=2181 \
-          --election_port=3888 \
-          --server_port=2888 \
-          --tick_time=2000 \
-          --init_limit=10 \
-          --sync_limit=5 \
-          --heap=512M \
-          --max_client_cnxns=60 \
-          --snap_retain_count=3 \
-          --purge_interval=12 \
-          --max_session_timeout=40000 \
-          --min_session_timeout=4000 \
-          --log_level=INFO"
+        - "/zookeeper/bin/zkServer.sh start-foreground"
         readinessProbe:
           exec:
             command:
             - sh
             - -c
-            - "zookeeper-ready 2181"
+            - "/zookeeper/bin/zkServer.sh status"
           initialDelaySeconds: 10
           timeoutSeconds: 5
         livenessProbe:
@@ -119,7 +100,7 @@ spec:
             command:
             - sh
             - -c
-            - "zookeeper-ready 2181"
+            - "/zookeeper/bin/zkServer.sh status"
           initialDelaySeconds: 10
           timeoutSeconds: 5
         volumeMounts:
