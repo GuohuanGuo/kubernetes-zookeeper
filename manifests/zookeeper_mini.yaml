@@ -73,7 +73,7 @@ spec:
       containers:
       - name: zk
         imagePullPolicy: Always
-        image: zookeeper:latest
+        image: zookeeper:3.7 
         resources:
           requests:
             memory: "1Gi"
