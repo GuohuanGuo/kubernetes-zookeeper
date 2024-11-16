@@ -70,7 +70,10 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: zk
-        image: zookeeper:3.7
+        image: bitnami/zookeeper:latest
+        env: 
+        - name: ZOO_ENABLE_AUTH
+          value: "no" 
         imagePullPolicy: Always
         resources:
           requests:
