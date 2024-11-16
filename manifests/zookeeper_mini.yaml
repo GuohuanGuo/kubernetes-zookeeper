@@ -43,7 +43,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zk
-  namespace:u5243221
+  namespace: u5243221
 spec:
   serviceName: zk-hs
   replicas: 3
