@@ -86,10 +86,6 @@ spec:
           name: server
         - containerPort: 3888
           name: leader-election
-        command:
-        - sh
-        - -c
-        - "/zookeeper/bin/zkServer.sh start-foreground"
         readinessProbe:
           exec:
             command:
